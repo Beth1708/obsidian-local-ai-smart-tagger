@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Beth1708/obsidian-local-ai-smart-tagger/issues"
   },
-  "homepage": "https://github.com/Beth1708/obsidian-local-ai-smart-tagger#readme"
+  "homepage": "https://github.com/Beth1708/obsidian-local-ai-smart-tagger#readme",
+  "devDependencies": {
+    "obsidian": "^1.13.1"
+  }
 }

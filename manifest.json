@@ -1,0 +1,9 @@
+{
+	"id": "smart-tagger-local",
+	"name": "Local AI Smart Tagger",
+	"version": "1.0.0",
+	"minAppVersion": "1.5.0",
+	"description": "Discovers context-aware tags and generates note summaries using a local Ollama instance.",
+	"author": "Beth Kirby",
+	"isDesktopOnly": true
+}
