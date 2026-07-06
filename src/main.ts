@@ -34,6 +34,7 @@ export default class SmartTaggerPlugin extends Plugin {
                     console.log("File content length:", fileContent.length);
                     console.log("Calling Ollama with content length:", fileContent.length);
                     const aiResult = await this.callOllamaJson(fileContent);
+                    console.log("AI Result:", aiResult);
 
                     await this.app.fileManager.processFrontMatter(activeFile, (frontmatter) => {
                          frontmatter['summary'] = aiResult.summary;
@@ -65,12 +66,12 @@ export default class SmartTaggerPlugin extends Plugin {
         const MODEL_NAME = 'llama3.2:latest';
         const OLLAMA_ENDPOINT = 'http://localhost:11434/api/generate';
 
-        const systemPrompt = `You are a precise metadata assistant for an Obsidian vault. 
-        Analyze the user's note text and return a JSON object with exactly two keys:
-        1. "summary": A concise, single-sentence summary of the main idea.
-        2. "tags": An array of lowercase tags relevant to the text. Do not include the '#' symbol. 
+       const systemPrompt = `You are a precise metadata assistant for an Obsidian vault. 
+Analyze the user's note text and return a JSON object with exactly two keys:
+1. "summary": A comprehensive summary of the main ideas. If the note covers multiple distinct topics, ensure the summary synthesizes all of them cleanly. It can be multiple sentences or a short paragraph as needed.
+2. "tags": An array of lowercase tags relevant to the text. Do not include the '#' symbol. Tags must not contain spaces; use hyphens instead (e.g., "competence-problem").
 
-        CRITICAL: Tags must not contain spaces. Use a single hyphen (-) instead of a space for multi-word concepts (e.g., use "competence-problem" instead of "competence problem").`;
+Your output must be raw JSON only. Do not wrap it in markdown blocks or include conversational text.`;
 
         try {
             // Obsidian's secure, CORS-bypassing network request utility
